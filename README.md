@@ -55,7 +55,7 @@ Setting directory as read-only avoids problems with concurrency.
 Run a second container.
 
 ``` bash
-docker container run --rm --name ga4gh-server -v ga4gh-example-data:/data -d -p 80:81 welliton/ga4gh-server:0.3.6
+docker container run --rm --name ga4gh-server -v ga4gh-example-data:/data -d -p 81:80 welliton/ga4gh-server:0.3.6
 ```
 
 The second container does not depends on the first one.
