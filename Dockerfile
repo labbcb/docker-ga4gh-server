@@ -1,4 +1,4 @@
-# welliton/ga4gh-server:0.3.6
+# welliton/ga4gh-server:v0.3.6
 
 FROM debian:jessie
 
