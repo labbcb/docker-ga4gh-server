@@ -1,6 +1,7 @@
 FROM debian:jessie
 
 MAINTAINER Welliton Souza <well309@gmail.com>
+ENV VERSION=0.3.6
 
 RUN apt-get update --fix-missing && \
   apt-get install --yes --no-install-recommends wget curl \
@@ -8,7 +9,7 @@ RUN apt-get update --fix-missing && \
     python-distribute python-pip zlib1g-dev apache2 libapache2-mod-wsgi \
     libxslt1-dev libffi-dev libssl-dev && \
   pip install --upgrade pip setuptools && \
-  pip install ga4gh-server==0.3.6 && \
+  pip install ga4gh-server==${VERSION} && \
   apt-get remove -y python-pip curl && \
   rm -rf /var/lib/apt/lists/* && \
   a2enmod wsgi && \
@@ -22,11 +23,11 @@ COPY application.wsgi /srv/ga4gh/application.wsgi
 COPY config.py /srv/ga4gh/config.py
 COPY peers.txt /srv/ga4gh/peers.txt
 
-WORKDIR /etc/apache2/sites-enabled
-RUN a2dissite 000-default && \
+RUN cd /etc/apache2/sites-enabled && \
+  a2dissite 000-default && \
   a2ensite 001-ga4gh
 
-WORKDIR /srv/ga4gh
+WORKDIR /data
 
 EXPOSE 80
 
